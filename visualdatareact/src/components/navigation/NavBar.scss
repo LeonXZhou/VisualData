@@ -1,6 +1,16 @@
 nav.top{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  
+  position: absolute;
+  top:0px;
+  left:0px;
+
+  width: 100vw;
+  height: 3em;
+  background-color: aqua;
+  
   .left{
     display:flex;
   }
