@@ -5,26 +5,11 @@ export default function NavBarTop() {
   return (
     <nav className="top">
       <div className="left">
-        <NavBarButton>
-          left
+        <NavBarButton link={'/'}>
+          Home
         </NavBarButton>
-        <NavBarButton>
-          left
-        </NavBarButton>
-        <NavBarButton>
-          left
-        </NavBarButton>
-        <NavBarButton>
-          left
-        </NavBarButton>
-        <NavBarButton>
-          left
-        </NavBarButton>
-        <NavBarButton>
-          left
-        </NavBarButton>
-        <NavBarButton>
-          left
+        <NavBarButton link={'/data'}>
+          Data
         </NavBarButton>
       </div>
       <div className="center">

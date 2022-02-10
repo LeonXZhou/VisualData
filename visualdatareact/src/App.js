@@ -1,14 +1,21 @@
-import NavBar from "./components/navigation/NavBarTop"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+import './App.scss';
+import NavBar from "./components/navigation/NavBarTop"
+import Home from "./components/home/Home";
+import BasicVisualization from "./components/basicVisualization/BasicVisualization";
 
 export default function App() {
   return (
     <BrowserRouter>
       <NavBar></NavBar>
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-      </Routes>
+      <div className={'contentBody'}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/data/" element={<BasicVisualization/>} />
+        </Routes>
+      </div>
     </BrowserRouter>
 
-  )
+  );
 }
