@@ -9,39 +9,53 @@ import {
   CategoryScale,
 } from 'chart.js';
 
-import { useState } from 'react';
+import { useState, } from 'react';
 
 export default function BasicVisualization() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend);
+  const [xState, setxState] = useState('');
+  const [yState, setyState] = useState('');
 
-  const [dataState, setDataState] = useState({
-    datasets: [{
-      label: '',
-      data: null,
-      type: "scatter",
-      backgroundColor: null,
-      borderColor: null,
-      pointStyle: 'star',
-    }]
-  });
+  const xData = xState.split(',');
+  const yData = yState.split(',');
+  const inputData = [];
+
+  if (xData.length > yData.length) {
+    for (const i in xData) {
+      if (xData[i] !== "") {
+        if (yData[i]) {
+          inputData.push({ x: xData[i], y: yData[i] })
+        }
+        else {
+          inputData.push({ x: xData[i], y: 0 })
+        }
+      }
+    }
+  }
+  if (xData.length <= yData.length) {
+    for (const i in yData) {
+      if (yData[i] !== "") {
+        if (xData[i]) {
+          inputData.push({ x: xData[i], y: yData[i] })
+        }
+        else {
+          inputData.push({ x: 0, y: yData[i] })
+        }
+      }
+    }
+  }
+
+
+
   const data = {
     datasets: [
       {
         label: 'A dataset',
-        data: [{ x: 1, y: 1 }, { x: 2, y: 3 }],
+        data: inputData,
         type: "scatter",
         backgroundColor: 'rgba(255, 99, 132, 1)',
         borderColor: 'rgba(255, 99, 132, 1)',
         pointStyle: 'star',
-      },
-      {
-        label: 'A dataset',
-        data: [{ x: 2, y: 2 }, { x: 10, y: 5 }],
-        type: "line",
-        backgroundColor: 'rgba(25, 99, 132, 1)',
-        borderColor: 'rgba(25, 99, 132, 1)',
-        pointStyle: 'circle',
-        pointRadius: 0,
       },
     ],
   };
@@ -61,9 +75,17 @@ export default function BasicVisualization() {
   }
 
   return (
-    <Chart
-      data={dataState}
-      options={options}
-    />
+    <>
+      <Chart
+        data={data}
+        options={options}
+      />
+      <label>x</label>
+      <input value={xState} onChange={(e) => { setxState(e.target.value) }}>
+      </input>
+      <label>y</label>
+      <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
+      </input>
+    </>
   );
 }
