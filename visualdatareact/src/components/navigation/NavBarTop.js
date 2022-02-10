@@ -1,16 +1,25 @@
-import './NavBar.scss'
+import './NavBar.scss';
+import NavBarButton from './NavBarButton';
+
 export default function NavBarTop() {
   return (
     <nav className="top">
       <div className="left">
-        left
+        <NavBarButton link={'/'}>
+          Home
+        </NavBarButton>
+        <NavBarButton link={'/data'}>
+          Data
+        </NavBarButton>
       </div>
       <div className="center">
-        center
+        VISUAL DATA
       </div>
       <div className="right">
-        right
+        <NavBarButton>
+          right
+        </NavBarButton>
       </div>
     </nav>
-  )
+  );
 }
