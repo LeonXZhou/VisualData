@@ -7,12 +7,13 @@ import {
   Tooltip,
   Legend,
   CategoryScale,
+  ScatterController,
 } from 'chart.js';
 
 import { useState, } from 'react';
 
 export default function BasicVisualization() {
-  ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend);
+  ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
 
