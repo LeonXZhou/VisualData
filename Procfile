@@ -1,1 +1,1 @@
-web: gunicorn visualdatadjango/visualdatadjango.wsgi --log-file -
+web: gunicorn --pythonpath visualdatadjango visualdatadjango.wsgi --log-file -
