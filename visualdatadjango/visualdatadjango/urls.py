@@ -16,14 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.shortcuts import render
+from django.http import JsonResponse
 
 
 def render_react(request):
     return render(request, "index.html")
 
 
+def test(request):
+    print('iran')
+    data = {
+        'name': 'Vitor',
+        'location': 'Finland',
+        'is_active': True,
+        'count': 28
+    }
+    return JsonResponse(data)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    re_path(r"^$", render_react),
-    re_path(r"^(?:.*)/?$", render_react),
+    path("api/", test),
+    # re_path(r"^$", render_react),
+    re_path(r"/?$", render_react),
 ]
