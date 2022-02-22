@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath visualdatadjango visualdatadjango.wsgi --log-file -

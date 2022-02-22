@@ -11,8 +11,8 @@ export default function App() {
       <NavBar></NavBar>
       <div className={'contentBody'}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/data/" element={<BasicVisualization/>} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<BasicVisualization/>} />
         </Routes>
       </div>
     </BrowserRouter>
