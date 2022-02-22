@@ -1,0 +1,1 @@
+web: gunicorn visualdatadjango.wsgi --log-file -
