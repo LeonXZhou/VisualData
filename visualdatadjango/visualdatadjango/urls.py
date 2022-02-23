@@ -17,14 +17,19 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
+@ensure_csrf_cookie
 def render_react(request):
     return render(request, "index.html")
 
 
 def test(request):
     print('iran')
+    print(request.method)
+    if request.method == 'POST':
+        return JsonResponse({'bob':'wooop'})
     data = {
         'name': 'Vitor',
         'location': 'Finland',
@@ -32,6 +37,7 @@ def test(request):
         'count': 28
     }
     return JsonResponse(data)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
