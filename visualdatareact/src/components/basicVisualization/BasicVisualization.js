@@ -25,45 +25,22 @@ export default function BasicVisualization() {
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
 
-  const xData = (xState.split(',')[0]==='') ? []:xState.split(',');
-  const yData = (yState.split(',')[0]==='') ? []:yState.split(',');
+  const xData = (xState.split(',')[0] === '') ? [] : xState.split(',');
+  const yData = (yState.split(',')[0] === '') ? [] : yState.split(',');
   const inputData = [];
 
-  while (xData.length < yData.length)
-  {
+  while (xData.length < yData.length) {
     xData.push(0)
   }
 
-  while (xData.length > yData.length)
-  {
+  while (xData.length > yData.length) {
     yData.push(0)
   }
 
-  if (xData.length > yData.length) {
-    for (const i in xData) {
-      if (xData[i] !== "") {
-        if (yData[i]) {
-          inputData.push({ x: xData[i], y: yData[i] })
-        }
-        else {
-          inputData.push({ x: xData[i], y: 0 })
-        }
-      }
-    }
+  for (const i in yData) {
+    inputData.push({ x: xData[i], y: yData[i] })
   }
-  
-  if (xData.length <= yData.length) {
-    for (const i in yData) {
-      if (yData[i] !== "") {
-        if (xData[i]) {
-          inputData.push({ x: xData[i], y: yData[i] })
-        }
-        else {
-          inputData.push({ x: 0, y: yData[i] })
-        }
-      }
-    }
-  }
+
 
 
 
@@ -107,11 +84,10 @@ export default function BasicVisualization() {
       <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
       </input>
       <button onClick={() => {
-        calcLinearFit(xData,yData);
-          // axios.post('/api/linear/', { asdf: 'oops' },
-          //   { headers: { 'X-CSRFToken': Cookies.get('csrftoken') } })
-          //   .then((res) => { console.log(res) })
-        }}>what</button>
+        calcLinearFit(xData, yData).then(
+          () => { console.log('asdf') }
+        )
+      }}>what</button>
     </>
   );
 }
