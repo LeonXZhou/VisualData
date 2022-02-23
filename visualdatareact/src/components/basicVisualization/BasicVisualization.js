@@ -1,3 +1,6 @@
+import { useState, } from 'react';
+
+//chart js
 import { Chart } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
@@ -10,41 +13,34 @@ import {
   ScatterController,
 } from 'chart.js';
 
-import { useState, } from 'react';
+//helpers
+import { calcLinearFit } from '../../helpers/apiHelpers';
+
+import axios from 'axios';
+import Cookies from 'js-cookie'
+
 
 export default function BasicVisualization() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
 
-  const xData = xState.split(',');
-  const yData = yState.split(',');
+  const xData = (xState.split(',')[0] === '') ? [] : xState.split(',');
+  const yData = (yState.split(',')[0] === '') ? [] : yState.split(',');
   const inputData = [];
 
-  if (xData.length > yData.length) {
-    for (const i in xData) {
-      if (xData[i] !== "") {
-        if (yData[i]) {
-          inputData.push({ x: xData[i], y: yData[i] })
-        }
-        else {
-          inputData.push({ x: xData[i], y: 0 })
-        }
-      }
-    }
+  while (xData.length < yData.length) {
+    xData.push(0)
   }
-  if (xData.length <= yData.length) {
-    for (const i in yData) {
-      if (yData[i] !== "") {
-        if (xData[i]) {
-          inputData.push({ x: xData[i], y: yData[i] })
-        }
-        else {
-          inputData.push({ x: 0, y: yData[i] })
-        }
-      }
-    }
+
+  while (xData.length > yData.length) {
+    yData.push(0)
   }
+
+  for (const i in yData) {
+    inputData.push({ x: xData[i], y: yData[i] })
+  }
+
 
 
 
@@ -87,6 +83,11 @@ export default function BasicVisualization() {
       <label>y</label>
       <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
       </input>
+      <button onClick={() => {
+        calcLinearFit(xData, yData).then(
+          () => { console.log('asdf') }
+        )
+      }}>what</button>
     </>
   );
 }
