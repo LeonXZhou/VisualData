@@ -11,6 +11,8 @@ object-assign
  * Released under the MIT License
  */
 
+/*! js-cookie v3.0.1 | MIT */
+
 /**
  * React Router v6.2.1
  *
