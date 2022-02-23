@@ -24,14 +24,16 @@ from django.http import JsonResponse
 def render_react(request):
     return render(request, "index.html")
 
+
 @ensure_csrf_cookie
 def set_crsf_dev(request):
-    return JsonResponse({'dev':'dev'})
+    return JsonResponse({'dev': 'dev'})
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include('api.urls')),
-    path("crsf-dev/",set_crsf_dev),
-    # re_path(r"^$", render_react),
-    re_path(r"/?$", render_react),
+    path("crsf-dev/", set_crsf_dev),
+    re_path(r"^$", render_react),
+    re_path(r"^(?:.*)/?$", render_react),
 ]

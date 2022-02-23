@@ -19,11 +19,7 @@ def test(request):
 
 
 def linear(request):
-    print(json.loads(request.body))
-    data = {
-        'name': 'Vitor',
-        'location': 'Finland',
-        'is_active': True,
-        'count': 28
-    }
-    return JsonResponse(data)
+    request_data = json.loads(request.body)
+    for xVal in request_data['xVals']:
+        print(xVal)
+    return JsonResponse(request_data)
