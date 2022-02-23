@@ -25,9 +25,12 @@ export default function BasicVisualization() {
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
 
-  const xData = (xState.split(',')[0] === '') ? [] : xState.split(',');
-  const yData = (yState.split(',')[0] === '') ? [] : yState.split(',');
+  let xData = xState.split(',')
+  let yData = yState.split(',')
   const inputData = [];
+
+  xData = xData.filter(x=> x !=='');
+  yData = yData.filter(y=> y !=='');
 
   while (xData.length < yData.length) {
     xData.push(0)
