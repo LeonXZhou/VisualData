@@ -1,21 +1,9 @@
 from django.urls import path
-from django.http import JsonResponse
 
-from . import views
+from . import linear_fit_views
 
-def test(request):
-    print('iran')
-    print(request.method)
-    if request.method == 'POST':
-        return JsonResponse({'bob':'wooooooop'})
-    data = {
-        'name': 'Vitor',
-        'location': 'Finland',
-        'is_active': True,
-        'count': 28
-    }
-    return JsonResponse(data)
 
 urlpatterns = [
-    path('', test),
+    path('', linear_fit_views.test),
+    path('linear/',linear_fit_views.linear)
 ]
