@@ -14,9 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.shortcuts import render
-from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
@@ -25,23 +24,9 @@ def render_react(request):
     return render(request, "index.html")
 
 
-def test(request):
-    print('iran')
-    print(request.method)
-    if request.method == 'POST':
-        return JsonResponse({'bob':'wooop'})
-    data = {
-        'name': 'Vitor',
-        'location': 'Finland',
-        'is_active': True,
-        'count': 28
-    }
-    return JsonResponse(data)
-
-
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", test),
+    path("api/", include('api.urls')),
     # re_path(r"^$", render_react),
     re_path(r"/?$", render_react),
 ]
