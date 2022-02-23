@@ -16,9 +16,6 @@ import {
 //helpers
 import { calcLinearFit } from '../../helpers/apiHelpers';
 
-import axios from 'axios';
-import Cookies from 'js-cookie'
-
 
 export default function BasicVisualization() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
@@ -44,9 +41,6 @@ export default function BasicVisualization() {
     inputData.push({ x: xData[i], y: yData[i] })
   }
 
-
-
-
   const data = {
     datasets: [
       {
@@ -61,12 +55,12 @@ export default function BasicVisualization() {
   };
 
   const options = {
-    scale: {
-      x: {
-        suggestedMax: 10,
-        suggestedMin: -10,
-      },
-    },
+    // scale: {
+    //   x: {
+    //     suggestedMax: 10,
+    //     suggestedMin: -10,
+    //   },
+    // },
     plugins: {
       legend: {
         display: false,
@@ -88,7 +82,7 @@ export default function BasicVisualization() {
       </input>
       <button onClick={() => {
         calcLinearFit(xData, yData).then(
-          () => { console.log('asdf') }
+          (res) => { console.log(res.data) }
         )
       }}>what</button>
     </>
