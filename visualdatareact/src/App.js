@@ -10,7 +10,7 @@ import Home from "./components/home/Home";
 import LinearFit from "./components/basicVisualization/LinearFit";
 
 //helpers
-import { getCsrfCookie} from "./helpers/apiHelpers";
+import { getCsrfCookie } from "./helpers/apiHelpers";
 
 export default function App() {
 
@@ -19,10 +19,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <NavBar></NavBar>
+      <div className='contentBody'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/data" element={<LinearFit />} />
         </Routes>
+      </div>
     </BrowserRouter>
 
   );

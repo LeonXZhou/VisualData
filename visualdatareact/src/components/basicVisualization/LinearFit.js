@@ -1,5 +1,7 @@
-import { useEffect, useState, } from 'react';
+import { useEffect, useState, } from 'react'
 
+//styles
+import './LinearFit.scss'
 //chart js
 import { Chart } from 'react-chartjs-2'
 import {
@@ -19,8 +21,8 @@ import { calcLinearFit } from '../../helpers/apiHelpers';
 
 export default function LinearFit() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
-  const [xState, setxState] = useState('');
-  const [yState, setyState] = useState('');
+  const [xState, setxState] = useState('1,2.5,3,4,5.6,6');
+  const [yState, setyState] = useState('1,2,3,4.4,5,6');
   const [lineData, setLineData] = useState([]);
 
   let xData = xState.split(',')
@@ -44,7 +46,7 @@ export default function LinearFit() {
   const data = {
     datasets: [
       {
-        label: 'A dataset',
+        label: 'x value',
         data: inputData,
         type: "scatter",
         backgroundColor: 'rgba(255, 99, 132, 1)',
@@ -65,14 +67,14 @@ export default function LinearFit() {
   if (lineData.length > 0) {
     console.log(lineData)
     data.datasets[1] = {
-      label: 'A dataset',
+      label: 'yvalue dataset',
       data: lineData,
       type: "line",
       backgroundColor: 'rgba(255, 99, 132, 1)',
       borderColor: 'rgba(255, 99, 132, 1)',
       pointStyle: 'none',
       pointRadius: 0,
-      borderWidth: 1
+      borderWidth: 1,
     }
   }
 
@@ -82,20 +84,35 @@ export default function LinearFit() {
         display: false,
       }
     },
+    events: []
   }
 
   return (
-    <>
-      <Chart
-        data={data}
-        options={options}
-      />
-      <label>x</label>
-      <input value={xState} onChange={(e) => { setxState(e.target.value) }}>
-      </input>
-      <label>y</label>
-      <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
-      </input>
-    </>
+    <div className='linearFitContainer'>
+
+      <div className='chartContainer'>
+        <Chart
+          data={data}
+          options={options}
+        />
+      </div>
+      <div className="dataAnalysisSectionContainer">
+
+          <div className="userInput">
+            <label>x</label>
+            <textarea value={xState} onChange={(e) => { setxState(e.target.value) }}>
+            </textarea>
+          </div>
+          <div className="userInput">
+            <label>y</label>
+            <textarea value={yState} onChange={(e) => { setyState(e.target.value) }}>
+            </textarea>
+          </div>
+
+        <p>Slope:</p>
+        <p>Intercept:</p>
+      </div>
+
+    </div>
   );
 }
