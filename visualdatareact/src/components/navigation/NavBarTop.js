@@ -15,11 +15,11 @@ export default function NavBarTop() {
       <div className="center">
         VISUAL DATA
       </div>
-      <div className="right">
+      {/* <div className="right">
         <NavBarButton>
           right
         </NavBarButton>
-      </div>
+      </div> */}
     </nav>
   );
 }

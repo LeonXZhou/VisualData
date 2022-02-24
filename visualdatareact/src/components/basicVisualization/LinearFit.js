@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import { useEffect, useState, } from 'react';
 
 //chart js
 import { Chart } from 'react-chartjs-2'
@@ -16,33 +16,30 @@ import {
 //helpers
 import { calcLinearFit } from '../../helpers/apiHelpers';
 
-import axios from 'axios';
-import Cookies from 'js-cookie'
 
-
-export default function BasicVisualization() {
+export default function LinearFit() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
+  const [lineData, setLineData] = useState([]);
 
-  const xData = (xState.split(',')[0] === '') ? [] : xState.split(',');
-  const yData = (yState.split(',')[0] === '') ? [] : yState.split(',');
-  const inputData = [];
+  let xData = xState.split(',')
+  let yData = yState.split(',')
+
+  xData = xData.filter(x => x !== '');
+  yData = yData.filter(y => y !== '');
 
   while (xData.length < yData.length) {
     xData.push(0)
   }
-
   while (xData.length > yData.length) {
     yData.push(0)
   }
 
+  const inputData = [];
   for (const i in yData) {
     inputData.push({ x: xData[i], y: yData[i] })
   }
-
-
-
 
   const data = {
     datasets: [
@@ -53,22 +50,38 @@ export default function BasicVisualization() {
         backgroundColor: 'rgba(255, 99, 132, 1)',
         borderColor: 'rgba(255, 99, 132, 1)',
         pointStyle: 'star',
-      },
+      }
     ],
   };
 
+  useEffect(() => {
+    calcLinearFit(xData, yData).then(
+      (res) => {
+        setLineData(res.data.data)
+      }
+    )
+  }, [xState, yState])
+
+  if (lineData.length > 0) {
+    console.log(lineData)
+    data.datasets[1] = {
+      label: 'A dataset',
+      data: lineData,
+      type: "line",
+      backgroundColor: 'rgba(255, 99, 132, 1)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      pointStyle: 'none',
+      pointRadius: 0,
+      borderWidth: 1
+    }
+  }
+
   const options = {
-    scale: {
-      x: {
-        suggestedMax: 10,
-        suggestedMin: -10,
-      },
-    },
     plugins: {
       legend: {
         display: false,
       }
-    }
+    },
   }
 
   return (
@@ -83,11 +96,6 @@ export default function BasicVisualization() {
       <label>y</label>
       <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
       </input>
-      <button onClick={() => {
-        calcLinearFit(xData, yData).then(
-          () => { console.log('asdf') }
-        )
-      }}>what</button>
     </>
   );
 }
