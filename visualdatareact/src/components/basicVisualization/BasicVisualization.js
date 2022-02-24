@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import { useEffect, useState, } from 'react';
 
 //chart js
 import { Chart } from 'react-chartjs-2'
@@ -21,22 +21,22 @@ export default function BasicVisualization() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
+  const [lineData, setLineData] = useState([]);
 
   let xData = xState.split(',')
   let yData = yState.split(',')
-  const inputData = [];
 
-  xData = xData.filter(x=> x !=='');
-  yData = yData.filter(y=> y !=='');
+  xData = xData.filter(x => x !== '');
+  yData = yData.filter(y => y !== '');
 
   while (xData.length < yData.length) {
     xData.push(0)
   }
-
   while (xData.length > yData.length) {
     yData.push(0)
   }
 
+  const inputData = [];
   for (const i in yData) {
     inputData.push({ x: xData[i], y: yData[i] })
   }
@@ -50,9 +50,31 @@ export default function BasicVisualization() {
         backgroundColor: 'rgba(255, 99, 132, 1)',
         borderColor: 'rgba(255, 99, 132, 1)',
         pointStyle: 'star',
-      },
+      }
     ],
   };
+
+  useEffect(() => {
+    calcLinearFit(xData, yData).then(
+      (res) => {
+        setLineData(res.data.data)
+      }
+    )
+  }, [xState, yState])
+
+  if (lineData.length > 0) {
+    console.log(lineData)
+    data.datasets[1] = {
+      label: 'A dataset',
+      data: lineData,
+      type: "line",
+      backgroundColor: 'rgba(255, 99, 132, 1)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      pointStyle: 'none',
+      pointRadius: 0,
+      borderWidth: 1
+    }
+  }
 
   const options = {
     // scale: {
@@ -82,9 +104,6 @@ export default function BasicVisualization() {
       <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
       </input>
       <button onClick={() => {
-        calcLinearFit(xData, yData).then(
-          (res) => { console.log(res.data) }
-        )
       }}>Fit</button>
     </>
   );
