@@ -17,7 +17,7 @@ import {
 import { calcLinearFit } from '../../helpers/apiHelpers';
 
 
-export default function BasicVisualization() {
+export default function LinearFit() {
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
   const [xState, setxState] = useState('');
   const [yState, setyState] = useState('');
@@ -77,18 +77,11 @@ export default function BasicVisualization() {
   }
 
   const options = {
-    // scale: {
-    //   x: {
-    //     suggestedMax: 10,
-    //     suggestedMin: -10,
-    //   },
-    // },
     plugins: {
       legend: {
         display: false,
       }
     },
-    // events: []
   }
 
   return (
