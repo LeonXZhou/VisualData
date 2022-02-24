@@ -34,7 +34,7 @@ def linear(request):
     for yVal in request_data['yVals']:
         ydata.append(float(yVal))
 
-    slope, intercept, r, p, se = linregress(xdata, ydata)
+    results = linregress(xdata, ydata)
 
     xRange = np.amax(xdata) - np.amin(xdata)
     xStart = np.amin(xdata) - xRange * .1
@@ -42,10 +42,10 @@ def linear(request):
     xSteps = int(xRange/0.1)
     
     xVals = np.linspace(xStart, xEnd, xSteps)
-    yVals = xVals * slope + intercept
+    yVals = xVals * results.slope + results.intercept
 
     lineData = []
     for i in range(len(xVals)):
         lineData.append({'x':xVals[i], 'y':yVals[i]})
 
-    return JsonResponse({'data':lineData})
+    return JsonResponse({'data':lineData, 'slope':results.slope,'intercept':results.intercept, 'slopeErr':results.stderr,'interceptErr':results.intercept_stderr})
