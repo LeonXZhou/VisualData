@@ -103,8 +103,6 @@ export default function BasicVisualization() {
       <label>y</label>
       <input value={yState} onChange={(e) => { setyState(e.target.value) }}>
       </input>
-      <button onClick={() => {
-      }}>Fit</button>
     </>
   );
 }
