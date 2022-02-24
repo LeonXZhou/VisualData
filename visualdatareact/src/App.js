@@ -19,12 +19,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <NavBar></NavBar>
-      <div className={'contentBody'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/data" element={<LinearFit />} />
         </Routes>
-      </div>
     </BrowserRouter>
 
   );
