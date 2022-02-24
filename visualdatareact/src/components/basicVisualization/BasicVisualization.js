@@ -65,7 +65,8 @@ export default function BasicVisualization() {
       legend: {
         display: false,
       }
-    }
+    },
+    // events: []
   }
 
   return (
@@ -84,7 +85,7 @@ export default function BasicVisualization() {
         calcLinearFit(xData, yData).then(
           (res) => { console.log(res.data) }
         )
-      }}>what</button>
+      }}>Fit</button>
     </>
   );
 }
