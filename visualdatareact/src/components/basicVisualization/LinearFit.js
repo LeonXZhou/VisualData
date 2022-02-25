@@ -111,12 +111,12 @@ export default function LinearFit() {
           <textarea value={yState} onChange={(e) => { setyState(e.target.value) }}>
           </textarea>
         </div>
-        <div className="userInput">
+        {/* <div className="userInput">
           <label>y</label>
           <input type="color" onChange={(e)=>{console.log(e.target.value)}}>
           </input>
         </div>
-      
+       */}
         <p>Slope: {slopeInterceptState.slope} &#177; {slopeInterceptState.slopeErr} </p>
         <p>Intercept: {slopeInterceptState.intercept} &#177; {slopeInterceptState.interceptErr}</p>
       </div>
