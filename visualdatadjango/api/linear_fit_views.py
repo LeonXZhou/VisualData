@@ -48,5 +48,10 @@ def linear(request):
     for i in range(len(xVals)):
         lineData.append({'x': xVals[i], 'y': yVals[i]})
 
-    return JsonResponse({'data': lineData, 
-        'slopeIntercept': {'slope': round(results.slope,3), 'intercept': round(results.intercept,3), 'slopeErr': round(results.stderr,3), 'interceptErr': round(results.intercept_stderr,3)}})
+    return JsonResponse({'data': lineData,
+                         'slopeIntercept': {
+                             'slope': round(results.slope, 3),
+                             'intercept': round(results.intercept, 3),
+                             'slopeErr': round(results.stderr, 3),
+                             'interceptErr': round(results.intercept_stderr, 3)
+                         }})
