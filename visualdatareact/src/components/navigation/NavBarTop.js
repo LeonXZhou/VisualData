@@ -6,20 +6,12 @@ export default function NavBarTop() {
     <nav className="top">
       <div className="left">
         <NavBarButton link={'/'}>
-          Home
+          VISUAL DATA
         </NavBarButton>
         <NavBarButton link={'/data'}>
-          Data
+          Basic Analysis
         </NavBarButton>
       </div>
-      <div className="center">
-        VISUAL DATA
-      </div>
-      {/* <div className="right">
-        <NavBarButton>
-          right
-        </NavBarButton>
-      </div> */}
     </nav>
   );
 }
