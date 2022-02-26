@@ -1,8 +1,11 @@
 .contentBody{
   position: absolute;
-
-  top: 3em;
   left: 0; 
-
-  width:80vw;
+  width:100%;
 }
+
+canvas{
+  background-color: rgb(197, 188, 188);
+}
+
+
