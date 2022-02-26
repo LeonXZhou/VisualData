@@ -11,6 +11,7 @@ import LinearFit from "./components/basicVisualization/LinearFit";
 
 //helpers
 import { getCsrfCookie } from "./helpers/apiHelpers";
+import ParticleBackground from "./components/ParticleBackground";
 
 export default function App() {
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/data" element={<LinearFit />} />
         </Routes>
       </div>
+      <ParticleBackground></ParticleBackground>
     </BrowserRouter>
 
   );
