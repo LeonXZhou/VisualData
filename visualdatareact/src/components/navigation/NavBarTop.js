@@ -1,5 +1,6 @@
 import './NavBar.scss';
 import NavBarButton from './NavBarButton';
+import NavBarDropDown from './NavBarDropDown';
 
 export default function NavBarTop() {
   return (
@@ -9,8 +10,11 @@ export default function NavBarTop() {
           VISUAL DATA
         </NavBarButton>
         <NavBarButton link={'/data'}>
-          Basic Analysis
+          Linear Regression
         </NavBarButton>
+        {/* <NavBarDropDown>
+          dropdown
+        </NavBarDropDown> */}
       </div>
     </nav>
   );
