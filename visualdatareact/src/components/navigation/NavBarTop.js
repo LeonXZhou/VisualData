@@ -9,8 +9,11 @@ export default function NavBarTop() {
         <NavBarButton link={'/'}>
           VISUAL DATA
         </NavBarButton>
-        <NavBarButton link={'/data'}>
+        <NavBarButton link={'/linear'}>
           Linear Regression
+        </NavBarButton>
+        <NavBarButton link={'/quadratic'}>
+          Quadratic Fit
         </NavBarButton>
         {/* <NavBarDropDown>
           dropdown

@@ -12,23 +12,30 @@ import {
 } from 'chart.js';
 
 //helpers
-import { calcLinearFit } from '../helpers/apiHelpers';
+import { calcLinearFit, calcQuadraticFit } from '../helpers/apiHelpers';
 
 
-export default function useFit() {
+export default function useFit(initialX, initialY, fitType, fitDataSetter) {
 
   ChartJS.register(LinearScale, PointElement, LineElement, CategoryScale, Tooltip, Legend, ScatterController);
-  const [xState, setxState] = useState('1,2.5,3,4,5.6,6');
-  const [yState, setyState] = useState('1,2,3,4.4,5,6');
+  const [xState, setxState] = useState(initialX);
+  const [yState, setyState] = useState(initialY);
   const [lineDataState, setLineDataState] = useState([]);
-  const [slopeInterceptState, setSlopeInterceptState] = useState({ slope: "", intercept: "", slopeErr: "", interceptErr: "" })
   useEffect(() => {
-    calcLinearFit(xData, yData).then(
-      (res) => {
-        setLineDataState(res.data.data)
-        setSlopeInterceptState(res.data.slopeIntercept)
-      }
-    )
+    if (fitType === "linear")
+    {
+      calcLinearFit(xData, yData).then(
+        (res) => {
+          setLineDataState(res.data.data)
+          fitDataSetter(res.data.slopeIntercept)
+        }
+      )
+    }
+
+    if (fitType === "quadratic")
+    {
+      calcQuadraticFit(xData, yData)
+    }
   }, [xState, yState])
 
   let xData = xState.split(',')
@@ -92,6 +99,6 @@ export default function useFit() {
     options={options}
   />)
 
-  return {Chartjsx, xState, setxState, yState, setyState, slopeInterceptState}
+  return { Chartjsx, xState, setxState, yState, setyState }
 
 }
