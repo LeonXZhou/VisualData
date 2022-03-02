@@ -6,3 +6,5 @@ Heroku Deployment: https://visualized-data.herokuapp.com/
 
 Current Features:
 * linear regression
+* quadratic fit
+* 
