@@ -17,5 +17,5 @@ export function calcQuadraticFit(xVals, yVals) {
   console.log('xdata', xVals);
   console.log('ydata', yVals);
 
-  return axios.post('/api/linear/', { xVals, yVals }, { headers: { 'X-CSRFToken': Cookies.get('csrftoken') } })
+  return axios.post('/api/quadratic/', { xVals, yVals }, { headers: { 'X-CSRFToken': Cookies.get('csrftoken') } })
 }

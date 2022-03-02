@@ -22,8 +22,7 @@ export default function useFit(initialX, initialY, fitType, fitDataSetter) {
   const [yState, setyState] = useState(initialY);
   const [lineDataState, setLineDataState] = useState([]);
   useEffect(() => {
-    if (fitType === "linear")
-    {
+    if (fitType === "linear") {
       calcLinearFit(xData, yData).then(
         (res) => {
           setLineDataState(res.data.data)
@@ -32,9 +31,12 @@ export default function useFit(initialX, initialY, fitType, fitDataSetter) {
       )
     }
 
-    if (fitType === "quadratic")
-    {
-      calcQuadraticFit(xData, yData)
+    if (fitType === "quadratic") {
+      calcQuadraticFit(xData, yData).then(
+        (res) => {
+          setLineDataState(res.data.data)
+        }
+      )
     }
   }, [xState, yState])
 
