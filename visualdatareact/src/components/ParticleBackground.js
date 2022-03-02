@@ -32,7 +32,7 @@ export default () => {
             },
             modes: {
               repulse: {
-                distance: 100,
+                distance: 60,
                 duration: .4,
               },
             },
@@ -56,7 +56,7 @@ export default () => {
               enable: true,
               outMode: "bounce",
               random: false,
-              speed: 1.5,
+              speed: 1,
               straight: false,
             },
             number: {
@@ -64,7 +64,7 @@ export default () => {
                 enable: true,
                 area: 800,
               },
-              value: 80,
+              value: 40,
             },
             opacity: {
               value: 0.5,
