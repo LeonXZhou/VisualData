@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 //styles
 import './fit.scss'
@@ -6,14 +5,13 @@ import './fit.scss'
 import useFit from '../../hooks/useFit';
 // import { calcLinearFit } from '../helpers/apiHelpers';
 
-export default function LinearFit() {
-  const [slopeInterceptState, setSlopeInterceptState] = useState({ slope: "", intercept: "", slopeErr: "", interceptErr: "" })
-  
+export default function QuadraticFit() {
   const { Chartjsx,
     xState,
     setxState,
     yState,
-    setyState} = useFit('1,2.5,3,4,5.6,6','1,2,3,4.4,5,6','linear',setSlopeInterceptState);
+    setyState } = useFit('-5.5,-4.2,-2.7,-2.8,-1.1,.5,1.3,1.9,3.1,4.1,6', '25,16,9,4,1,0,1,4,9,16,25', 'quadratic');
+
 
   return (
     <div className='fitContainer'>
@@ -38,8 +36,6 @@ export default function LinearFit() {
           </input>
         </div>
        */}
-        <p>Slope: {slopeInterceptState.slope} &#177; {slopeInterceptState.slopeErr} </p>
-        <p>Intercept: {slopeInterceptState.intercept} &#177; {slopeInterceptState.interceptErr}</p>
       </div>
 
     </div>
