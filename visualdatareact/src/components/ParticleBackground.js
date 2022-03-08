@@ -21,7 +21,7 @@ export default () => {
           //     value: "#0d47a1",
           //   },
           // },
-          fpsLimit: 120,
+          fpsLimit: 60,
           interactivity: {
             events: {
               onHover: {

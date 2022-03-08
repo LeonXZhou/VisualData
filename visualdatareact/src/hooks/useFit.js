@@ -35,6 +35,7 @@ export default function useFit(initialX, initialY, fitType, fitDataSetter) {
       calcQuadraticFit(xData, yData).then(
         (res) => {
           setLineDataState(res.data.data)
+          fitDataSetter(res.data.abc)
         }
       )
     }
@@ -74,7 +75,6 @@ export default function useFit(initialX, initialY, fitType, fitDataSetter) {
 
 
   if (lineDataState.length > 0) {
-    console.log(lineDataState)
     data.datasets[1] = {
       label: 'yvalue dataset',
       data: lineDataState,
@@ -101,6 +101,6 @@ export default function useFit(initialX, initialY, fitType, fitDataSetter) {
     options={options}
   />)
 
-  return { Chartjsx, xState, setxState, yState, setyState }
+  return { Chartjsx, xState, setxState, yState, setyState, inputData }
 
 }
