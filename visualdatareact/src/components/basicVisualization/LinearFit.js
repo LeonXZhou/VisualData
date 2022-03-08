@@ -2,26 +2,31 @@
 import { useState } from 'react';
 //styles
 import './fit.scss'
-//chart js
+//custom hooks
 import useFit from '../../hooks/useFit';
-// import { calcLinearFit } from '../helpers/apiHelpers';
+//components
+import ValueTable from './ValueTable';
+
 
 export default function LinearFit() {
   const [slopeInterceptState, setSlopeInterceptState] = useState({ slope: "", intercept: "", slopeErr: "", interceptErr: "" })
-  
   const { Chartjsx,
     xState,
     setxState,
     yState,
-    setyState} = useFit('1,2.5,3,4,5.6,6','1,2,3,4.4,5,6','linear',setSlopeInterceptState);
+    setyState,
+    inputData } = useFit('1,2.5,3,4,5.6,6', '1,2,3,4.4,5,6', 'linear', setSlopeInterceptState);
 
   return (
     <div className='fitContainer'>
-      <div className='chartContainer'>
-        {Chartjsx}
+      <div className='chartTableFlex'>
+        <div className='chartContainer'>
+          {Chartjsx}
+        </div>
+        <ValueTable inputData={inputData}></ValueTable>
       </div>
-      <div className="dataAnalysisSectionContainer">
 
+      <div className="dataAnalysisSectionContainer">
         <div className="userInput">
           <label>x</label>
           <textarea value={xState} onChange={(e) => { setxState(e.target.value) }}>

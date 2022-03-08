@@ -6,7 +6,6 @@ import numpy as np
 # Create your views here.
 
 
-
 def linear(request):
     request_data = json.loads(request.body)
 
@@ -58,12 +57,8 @@ def quadratic(request):
     for yVal in request_data['yVals']:
         ydata.append(float(yVal))
 
-
-
-    polynomialCoef = np.polyfit(xdata,ydata,2);
-
+    polynomialCoef = np.polyfit(xdata, ydata, 2)
     
-
     xRange = np.amax(xdata) - np.amin(xdata)
     xStart = np.amin(xdata) - xRange * .1
     xEnd = np.amax(xdata) + xRange * .1
@@ -71,12 +66,16 @@ def quadratic(request):
 
     xVals = np.linspace(xStart, xEnd, xSteps)
 
-    yVals = np.polyval(polynomialCoef,xVals)
+    yVals = np.polyval(polynomialCoef, xVals)
     # yVals = xVals * results.slope + results.intercept
 
     quadraticData = []
     for i in range(len(xVals)):
         quadraticData.append({'x': xVals[i], 'y': yVals[i]})
 
-    return JsonResponse({'data': quadraticData})
-
+    return JsonResponse({'data': quadraticData,
+                         'abc': {
+                             'a': round(polynomialCoef[0],3),
+                             'b': round(polynomialCoef[1],3),
+                             'c': round(polynomialCoef[2],3),
+                         }})
